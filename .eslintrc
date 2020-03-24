@@ -1,52 +1,24 @@
 {
-	"extends": "eslint:recommended",
-	"plugins": [],
-	
+	"root": true,
+	"extends": [
+		"plugin:vue/recommended"
+	],
+
 	"env": {
-		"es6": true,
-		"browser": true
+		"node": true
 	},
 	
 	"parserOptions": {
-		"ecmaVersion": 9
+		"parser": "babel-eslint"
 	},
-	
+
 	"rules": {
 		"semi": ["error", "always", { "omitLastInOneLineBlock": true }],
-		"semi-style": ["error", "last"],
-		"no-unused-vars": "warn",
-		"no-duplicate-imports": "error",
-		"object-shorthand": ["error", "always", { "avoidExplicitReturnArrows": true }],
-		"prefer-rest-params": "warn",
-		"prefer-spread": "warn",
-		"prefer-template": "warn",
-		"prefer-numeric-literals": "warn"
-	},
 
-	"overrides": [
-		{
-			"files": ["**/*.ts"],
-
-			"extends": [
-				"plugin:@typescript-eslint/eslint-recommended",
-				"plugin:@typescript-eslint/recommended"
-			],
-			
-			"plugins": ["@typescript-eslint"],
-	
-			"env": {
-				"es6": true
-			},
-
-			"parser": "@typescript-eslint/parser",
-			"parserOptions": {
-				"ecmaVersion": 6,
-				"sourceType": "module"
-			},
-
-			"rules": {
-				"@typescript-eslint/no-namespace": "off"
-			}
-		}
-	]
+		"vue/no-spaces-around-equal-signs-in-attribute": "off",
+		"vue/html-indent": ["error", "tab"],
+		"vue/singleline-html-element-content-newline": "off",
+		"vue/attribute-hyphenation": "off",
+		"vue/max-attributes-per-line": "off"
+	}
 }
