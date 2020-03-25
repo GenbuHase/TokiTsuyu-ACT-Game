@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"name": "tokitsuyu_act-game",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "",
 	"keywords": [],
 	"main": "",
@@ -18,7 +18,7 @@
 	"bugs": {
 		"url": "https://github.com/GenbuHase/TokiTsuyu-ACT-Game/issues"
 	},
-	"author": "",
+	"author": "とき(https://github.com/toki0525) & つゆ(https://github.com/GenbuHase)",
 	"license": "MIT",
 	"dependencies": {
 		"core-js": "^3.6.4",
