@@ -16,44 +16,64 @@
 </style>
 
 <script>
-	import { p5Plus } from "@/libs/p5.plus";
-
-	const TEXTURES = {
-		Player: {
-			Standing: null,
-			Walking: null,
-			Running: null
-		}
-	};
+	import TextureLoader from "@/libs/TextureLoader.js";
 
 
-	let player;
+	let textureLoader = new TextureLoader();
+	textureLoader.loadConfig("/assets/characters/texture.json").then(config => {
+		console.log(config);
+	}).then(() => {
+		let girl, boy;
+		
+		new p5(p => {
+			const getCvsSize = () => Math.min(p.windowWidth, p.windowHeight);
 
-	const sketch = p => {
-		p.preload = () => {
-			p5Plus(p);
 
-			TEXTURES.Player.Standing = p.loadAnimation("/assets/characters/girl_running--001.png", "/assets/characters/girl_running--003.png");
-			TEXTURES.Player.Standing.frameDelay = 10;
-		};
+			p.preload = () => {
+				textureLoader.loadTextures(p);
+			};
 
-		p.setup = () => {
-			for (const img of TEXTURES.Player.Standing.images) img.width = p.windowMinSize/4, img.height = p.windowMinSize/3;
+			p.setup = () => {
+				p.createCanvas(getCvsSize(), getCvsSize());
+				
+				/*for (const img of TEXTURES["girl/Standing"].images) img.width = getCvsSize() / 4, img.height = getCvsSize() / 3;
+				for (const img of TEXTURES["girl/Running"].images) img.width = getCvsSize() / 4, img.height = getCvsSize() / 3;*/
 
-			p.createCanvas(p.windowMinSize, p.windowMinSize);
+				girl = p.createSprite();
+				girl.addAnimation("Standing", textureLoader.textures.Girl_Standing);
+				girl.addAnimation("Running", textureLoader.textures.Girl_Running);
+			};
 
-			player = p.createSprite(p.mouseX, p.mouseY);
-			player.addAnimation("player", TEXTURES.Player.Standing);
-		};
+			p.draw = () => {
+				p.background(255, 255, 255);
 
-		p.draw = () => {
-			p.background(255, 255, 255);
+				switch (true) {
+					case p.keyIsDown(p.LEFT_ARROW):
+						girl.changeAnimation("Running");
+						girl.addSpeed(-0.25, 0);
+						break;
+					case p.keyIsDown(p.RIGHT_ARROW):
+						girl.changeAnimation("Running");
+						girl.addSpeed(0.2, 0);
+						break;
+					case p.keyIsDown(p.UP_ARROW):
+						girl.changeAnimation("Running");
+						girl.addSpeed(-0.1, 90);
+						break;
+					case p.keyIsDown(p.DOWN_ARROW):
+						girl.changeAnimation("Running");
+						girl.addSpeed(0.1, 90);
+						break;
+					default:
+						girl.changeAnimation("Standing");
+						break;
+				}
 
-			player.position = p.createVector(p.mouseX, p.mouseY);
+				if (getCvsSize() < girl.position.x) girl.position.x = 0;
+				else if (girl.position.x < 0) girl.position.x = getCvsSize();
 
-			p.drawSprites();
-		};
-	};
-
-	new p5(sketch, "App");
+				p.drawSprites();
+			};
+		}, "App");
+	});
 </script>

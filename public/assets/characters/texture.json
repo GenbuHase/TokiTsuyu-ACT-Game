@@ -1,0 +1,19 @@
+{
+	"root": "/assets/characters/",
+
+	"texture": {
+		"Girl_Standing": {
+			"type": "Image",
+			"url": "girl/girl_standing.png"
+		},
+
+		"Girl_Running": {
+			"type": "Animation",
+			"url": ["girl/girl_running--001.png", "girl/girl_running--004.png"]
+		},
+
+		"Boy": {
+
+		}
+	}
+}

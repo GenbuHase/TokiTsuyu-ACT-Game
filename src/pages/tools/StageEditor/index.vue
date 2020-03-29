@@ -16,43 +16,41 @@
 </style>
 
 <script>
-	import { p5Plus } from "@/libs/p5.plus";
-
-	const TEXTURES = {
-		Player: {
-			Standing: null,
-			Walking: null,
-			Running: null
-		}
-	};
+	import TextureLoader from "@/libs/TextureLoader.js";
 
 
-	let player;
+	let textureLoader = new TextureLoader();
+	textureLoader.loadConfig("/assets/characters/texture.json").then(config => {
+		console.log(config);
+	}).then(() => {
+		let pointer;
 
-	const sketch = p => {
-		p.preload = () => {
-			p5Plus(p);
+		new p5(p => {
+			const getCvsSize = () => Math.min(p.windowWidth, p.windowHeight);
 
-			TEXTURES.Player.Standing = p.loadImage("/assets/characters/girl-standing.png", img => {
-				img.width = 96, img.height = 128;
-			});
-		};
 
-		p.setup = () => {
-			p.createCanvas(p.windowMinSize, p.windowMinSize);
+			p.preload = () => {
+				textureLoader.loadTextures(p);
+			};
 
-			player = p.createSprite(p.mouseX, p.mouseY, 48, 64);
-			player.addImage(TEXTURES.Player.Standing);
-		};
+			p.setup = () => {
+				const { Girl_Standing } = textureLoader.textures;
+				Girl_Standing.images[0].width = getCvsSize() / 4, Girl_Standing.images[0].height = getCvsSize() / 3;
 
-		p.draw = () => {
-			p.background(255, 255, 255);
 
-			player.position = p.createVector(p.mouseX, p.mouseY);
+				p.createCanvas(getCvsSize(), getCvsSize());
 
-			p.drawSprites();
-		};
-	};
+				pointer = p.createSprite(p.mouseX, p.mouseY);
+				pointer.addAnimation("Default", textureLoader.textures.Girl_Standing);
+			};
 
-	new p5(sketch, "App");
+			p.draw = () => {
+				p.background(255, 255, 255);
+
+				pointer.position = p.createVector(p.mouseX, p.mouseY);
+
+				p.drawSprites();
+			};
+		}, "App");
+	});
 </script>
