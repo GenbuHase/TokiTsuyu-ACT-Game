@@ -7,13 +7,85 @@
 			"url": "girl/girl_standing.png"
 		},
 
-		"Girl_Running": {
+		"Girl_RunningLeft": {
 			"type": "Animation",
-			"url": ["girl/girl_running--001.png", "girl/girl_running--004.png"]
+			"url": ["girl/girl_running-left--001.png", "girl/girl_running-left--004.png"]
 		},
 
-		"Boy": {
+		"Girl_RunningRight": {
+			"type": "Animation",
+			"url": ["girl/girl_running-right--001.png", "girl/girl_running-right--004.png"]
+		},
 
+		"Girl_JumpingLeft": {
+			"type": "Image",
+			"url": "girl/girl_jumping-left.png"
+		},
+
+		"Girl_JumpingRight": {
+			"type": "Image",
+			"url": "girl/girl_jumping-right.png"
+		},
+
+		"Girl_TalkingLeft": {
+			"type": "Image",
+			"url": "girl/girl_talking-left.png"
+		},
+
+		"Girl_TalkingRight": {
+			"type": "Image",
+			"url": "girl/girl_talking-right.png"
+		},
+
+		"Girl_Hurt": {
+			"type": "Image",
+			"url": "girl/girl_hurt.png"
+		},
+
+
+		"Boy_Standing": {
+			"type": "Image",
+			"url": "boy/boy_standing.png"
+		},
+
+		"Boy_WalkingLeft": {
+			"type": "Animation",
+			"url": ["boy/boy_walking-left--001.png", "boy/boy_walking-left--004.png"]
+		},
+
+		"Boy_WalkingRight": {
+			"type": "Animation",
+			"url": ["boy/boy_walking-right--001.png", "boy/boy_walking-right--004.png"]
+		},
+
+		"Boy_JumpingLeft": {
+			"type": "Image",
+			"url": "boy/boy_jumping-left.png"
+		},
+
+		"Boy_JumpingRight": {
+			"type": "Image",
+			"url": "boy/boy_jumping-right.png"
+		},
+
+		"Boy_TalkingLeft": {
+			"type": "Image",
+			"url": "boy/boy_talking-left.png"
+		},
+
+		"Boy_TalkingRight": {
+			"type": "Image",
+			"url": "boy/boy_talking-right.png"
+		},
+
+		"Boy_HurtLeft": {
+			"type": "Image",
+			"url": "boy/boy_hurt-left.png"
+		},
+
+		"Boy_HurtRight": {
+			"type": "Image",
+			"url": "boy/boy_hurt-right.png"
 		}
 	}
 }
