@@ -16,15 +16,17 @@
 </style>
 
 <script>
-	import TextureLoader from "@/libs/TextureLoader.js";
+	import TextureLoader from "../libs/TextureLoader";
+	import Girl from "../components/Girl";
 
 
 	let textureLoader = new TextureLoader();
 	textureLoader.loadConfig("/assets/characters/texture.json").then(config => {
 		console.log(config);
 	}).then(() => {
-		// let girl, boy;
-		let girl, boy = null;
+		/** @type {Girl} */
+		let girl = null;
+		let boy = null;
 		
 		new p5(p => {
 			const getCvsSize = () => Math.min(p.windowWidth, p.windowHeight);
@@ -53,12 +55,14 @@
 				p.createCanvas(getCvsSize(), getCvsSize());
 				p.frameRate(60);
 
-				girl = p.createSprite(200, 200);
+				window.girl = girl = new Girl(p, textureLoader.textures);
+
+				/*girl = p.createSprite(200, 200);
 				girl.addAnimation("Standing", textureLoader.textures.Girl_Standing);
 				girl.addAnimation("Running", textureLoader.textures.Girl_RunningLeft);
 				girl.addAnimation("Jumping", textureLoader.textures.Girl_JumpingLeft);
 				girl.addAnimation("Talking", textureLoader.textures.Girl_TalkingLeft);
-				girl.addAnimation("Hurt", textureLoader.textures.Girl_Hurt);
+				girl.addAnimation("Hurt", textureLoader.textures.Girl_Hurt);*/
 
 				boy = p.createSprite(400, 400);
 				boy.addAnimation("Standing", textureLoader.textures.Boy_Standing);
@@ -73,51 +77,54 @@
 
 				switch (true) {
 					case p.keyIsDown(83): // Key-S
-						girl.changeAnimation("Standing");
+						girl.state = "stand";
 						boy.changeAnimation("Standing");
 						break;
 					case p.keyIsDown(82): // Key-R
-						girl.changeAnimation("Running");
+						girl.state = "run";
 						boy.changeAnimation("Running");
 						break;
 					case p.keyIsDown(74): // Key-J
-						girl.changeAnimation("Jumping");
+						girl.state = "jump";
 						boy.changeAnimation("Jumping");
 						break;
 					case p.keyIsDown(84): // Key-T
-						girl.changeAnimation("Talking");
+						girl.state = "talk";
 						boy.changeAnimation("Talking");
 						break;
 					case p.keyIsDown(72): // Key-H
-						girl.changeAnimation("Hurt");
+						girl.state = "hurt";
 						boy.changeAnimation("Hurt");
 						break;
 
 					case p.keyIsDown(p.LEFT_ARROW):
-						girl.changeAnimation("Running");
+						girl.state = "run";
 						girl.addSpeed(-0.25, 0);
 						break;
 					case p.keyIsDown(p.RIGHT_ARROW):
-						girl.changeAnimation("Running");
+						girl.state = "run";
 						girl.addSpeed(0.2, 0);
 						break;
 					case p.keyIsDown(p.UP_ARROW):
-						girl.changeAnimation("Running");
+						girl.state = "run";
 						girl.addSpeed(-0.1, 90);
 						break;
 					case p.keyIsDown(p.DOWN_ARROW):
-						girl.changeAnimation("Running");
+						girl.state = "run";
 						girl.addSpeed(0.1, 90);
 						break;
 					default:
-						// girl.changeAnimation("Standing");
+						// girl.state = "stand";
 						break;
 				}
 
-				if (getCvsSize() < girl.position.x) girl.position.x = 0;
-				else if (girl.position.x < 0) girl.position.x = getCvsSize();
+				if (getCvsSize() < girl.sprite.position.x) girl.sprite.position.x = 0;
+				else if (girl.sprite.position.x < 0) girl.sprite.position.x = getCvsSize();
 
 				p.drawSprites();
+				girl.draw();
+
+				girl.attractionPoint(0.1, 200, 200);
 			};
 		}, "App");
 	});

@@ -2,6 +2,7 @@ export default class TextureLoader {
 	constructor () {
 		/** @type {TextureConfigObject} */
 		this.config = {};
+		/** @type { Object<string, TextureObject> } */
 		this.textures = {};
 	}
 
@@ -17,7 +18,7 @@ export default class TextureLoader {
 			});
 	}
 
-	loadTextures (p5Ctx) {
+	loadTextures (p) {
 		for (const entry of Object.entries(this.config.texture)) {
 			const [ key, texture ] = [ entry[0], entry[1] ];
 
@@ -31,7 +32,7 @@ export default class TextureLoader {
 					break;
 			}
 
-			this.textures[key] = p5Ctx.loadAnimation(...url);
+			this.textures[key] = p.loadAnimation(...url);
 		}
 	}
 }
