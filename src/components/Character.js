@@ -1,8 +1,20 @@
 export default class Character {
-	constructor (p) {
+	/**
+	 * @param {p5Context} p
+	 * @param { Object<string, TextureObject> } textures
+	 */
+	constructor (p, textures) {
+		this.textures = textures;
+
 		this.__p = p;
 		this.sprite = p.createSprite();
 	}
+
+	draw () {
+		const p = this.__p;
+		p.drawSprite(this.sprite);
+	}
+
 
 	get width () { return this.sprite.width }
 	set width (value) { this.sprite.width = value }
@@ -30,10 +42,4 @@ export default class Character {
 	get setVelocity () { return this.sprite.setVelocity }
 	get attractionPoint () { return this.sprite.attractionPoint }
 	get collide () { return this.sprite.collide }
-
-
-	draw () {
-		const p = this.__p;
-		p.drawSprite(this.sprite);
-	}
 }

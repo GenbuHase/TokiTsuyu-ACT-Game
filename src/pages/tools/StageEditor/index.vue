@@ -16,7 +16,7 @@
 </style>
 
 <script>
-	import TextureLoader from "@/libs/TextureLoader.js";
+	import TextureLoader from "@/libs/TextureLoader";
 
 
 	let textureLoader = new TextureLoader();

@@ -18,15 +18,18 @@
 <script>
 	import TextureLoader from "../libs/TextureLoader";
 	import Girl from "../components/Girl";
+	import Block from "../components/Block";
 
 
 	let textureLoader = new TextureLoader();
-	textureLoader.loadConfig("/assets/characters/texture.json").then(config => {
-		console.log(config);
+	textureLoader.loadProject("/assets/characters/texture.json").then(project => {
+		console.log(project);
 	}).then(() => {
 		/** @type {Girl} */
 		let girl = null;
 		let boy = null;
+		/** @type { Block[] } */
+		let blocks = [];
 		
 		new p5(p => {
 			const getCvsSize = () => Math.min(p.windowWidth, p.windowHeight);
@@ -70,6 +73,15 @@
 				boy.addAnimation("Jumping", textureLoader.textures.Boy_JumpingLeft);
 				boy.addAnimation("Talking", textureLoader.textures.Boy_TalkingLeft);
 				boy.addAnimation("Hurt", textureLoader.textures.Boy_HurtLeft);
+
+				let memW = getCvsSize() / 8;
+				for (let i = 0; i < 10; i++) {
+					blocks.push(new Block(p, {
+						x: memW * Math.floor(Math.random()*8),
+						y: memW * Math.floor(Math.random()*8),
+						width: memW, height: memW
+					}));
+				}
 			};
 
 			p.draw = () => {
@@ -123,6 +135,8 @@
 
 				p.drawSprites();
 				girl.draw();
+
+				for (const block of blocks) block.draw();
 
 				girl.attractionPoint(0.1, 200, 200);
 			};

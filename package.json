@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"name": "tokitsuyu-act-game",
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"description": "",
 	"keywords": [],
 	"main": "",
@@ -31,6 +31,7 @@
 		"@vue/eslint-config-standard": "^4.0.0",
 		"babel-eslint": "^10.1.0",
 		"eslint": "^5.16.0",
+		"eslint-config-p5js": "^1.0.1",
 		"eslint-plugin-vue": "^5.0.0",
 		"node-sass": "^4.13.1",
 		"sass-loader": "^8.0.2",

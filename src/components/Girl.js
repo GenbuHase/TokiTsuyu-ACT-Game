@@ -4,12 +4,11 @@ import Character from "./Character";
 
 export default class Girl extends Character {
 	/**
-	 * @param {*} p
+	 * @param {p5Context} p
 	 * @param { Object<string, TextureObject> } textures
 	 */
 	constructor (p, textures) {
 		super(p);
-		this.textures = textures;
 
 		const { sprite } = this;
 		sprite.addAnimation("stand", textures.Girl_Standing);
